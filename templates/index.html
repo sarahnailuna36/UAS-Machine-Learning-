@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Kelulusan Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Prediksi Kelulusan Mahasiswa</h2>
+
+    <form method="POST">
+        <input type="number" name="math" placeholder="Nilai Matematika" required>
+        <input type="number" name="reading" placeholder="Nilai Membaca" required>
+        <input type="number" name="writing" placeholder="Nilai Menulis" required>
+        <button type="submit">Prediksi</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        Hasil Prediksi: {{ result }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
