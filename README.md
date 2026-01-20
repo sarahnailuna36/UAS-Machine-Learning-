@@ -1,28 +1,23 @@
 # Prediksi Kelulusan Mahasiswa
 
-Proyek Machine Learning untuk memprediksi kelulusan mahasiswa
-berdasarkan nilai akademik menggunakan algoritma Decision Tree.
+Aplikasi Machine Learning untuk memprediksi kelulusan mahasiswa
+menggunakan Decision Tree dan FastAPI.
 
-## Dataset
-Dataset berbentuk tabel (Excel) yang berisi nilai:
-- Math score
-- Reading score
-- Writing score
-
-Target kelulusan ditentukan berdasarkan nilai rata-rata.
-
-## Metode
-Decision Tree Classifier
+## Fitur
+- Training model Decision Tree
+- Prediksi kelulusan via web
+- Framework FastAPI
 
 ## Cara Menjalankan
-1. Install dependency:
-   pip install -r requirements.txt
 
-2. Training model:
-   python train.py
+### 1. Install dependency
+python -m pip install -r requirements.txt
 
-3. Menjalankan aplikasi web:
-   python main.py
+### 2. Training model
+python train.py
 
-4. Buka browser:
-   http://127.0.0.1:5000
+### 3. Jalankan web
+python -m uvicorn main:app --reload
+
+Buka browser:
+http://127.0.0.1:8000

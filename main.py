@@ -1,28 +1,29 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 import joblib
 import pandas as pd
 
 app = FastAPI()
-
 templates = Jinja2Templates(directory="templates")
 
-# load model
+# Load model
 model = joblib.load("model_kelulusan.pkl")
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "result": None}
+    )
 
-@app.post("/")
-async def predict(request: Request):
-    form = await request.form()
-
-    math = float(form["math"])
-    reading = float(form["reading"])
-    writing = float(form["writing"])
-
+@app.post("/", response_class=HTMLResponse)
+def predict(
+    request: Request,
+    math: float = Form(...),
+    reading: float = Form(...),
+    writing: float = Form(...)
+):
     input_data = pd.DataFrame([{
         "math score": math,
         "reading score": reading,

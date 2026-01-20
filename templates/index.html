@@ -2,22 +2,19 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Prediksi Kelulusan Mahasiswa</title>
+    <title>Prediksi Kelulusan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             background: #f4f6f8;
         }
-        .container {
+        .box {
             width: 400px;
             margin: 60px auto;
             background: white;
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
         }
         input, button {
             width: 100%;
@@ -28,24 +25,20 @@
             background: #4CAF50;
             color: white;
             border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #45a049;
         }
         .result {
             margin-top: 15px;
-            text-align: center;
             font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="box">
     <h2>Prediksi Kelulusan Mahasiswa</h2>
 
-    <form method="POST">
+    <form method="post">
         <input type="number" name="math" placeholder="Nilai Matematika" required>
         <input type="number" name="reading" placeholder="Nilai Membaca" required>
         <input type="number" name="writing" placeholder="Nilai Menulis" required>
