@@ -1,31 +1,38 @@
-from flask import Flask, render_template, request
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import joblib
 import pandas as pd
 
-app = Flask(__name__)
+app = FastAPI()
 
-# Load model
+templates = Jinja2Templates(directory="templates")
+
+# load model
 model = joblib.load("model_kelulusan.pkl")
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    result = None
+@app.get("/")
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-    if request.method == "POST":
-        math = float(request.form["math"])
-        reading = float(request.form["reading"])
-        writing = float(request.form["writing"])
+@app.post("/")
+async def predict(request: Request):
+    form = await request.form()
 
-        input_data = pd.DataFrame([{
-            "math score": math,
-            "reading score": reading,
-            "writing score": writing
-        }])
+    math = float(form["math"])
+    reading = float(form["reading"])
+    writing = float(form["writing"])
 
-        prediction = model.predict(input_data)[0]
-        result = "Lulus" if prediction == 1 else "Tidak Lulus"
+    input_data = pd.DataFrame([{
+        "math score": math,
+        "reading score": reading,
+        "writing score": writing
+    }])
 
-    return render_template("index.html", result=result)
+    prediction = model.predict(input_data)[0]
+    result = "Lulus" if prediction == 1 else "Tidak Lulus"
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "result": result}
+    )

@@ -1,5 +1,7 @@
+fastapi
+uvicorn
+jinja2
 pandas
 scikit-learn
 joblib
 openpyxl
-flask
